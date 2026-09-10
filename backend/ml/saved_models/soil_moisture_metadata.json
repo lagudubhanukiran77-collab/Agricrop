@@ -1,0 +1,62 @@
+{
+  "model_name": "GradientBoostingRegressor",
+  "dataset_label": "Simulated/Synthetic Agricultural Training Data",
+  "num_samples": 3000,
+  "mae": 1.016,
+  "rmse": 1.661,
+  "r2_score": 0.9865,
+  "cv_r2_mean": 0.9821,
+  "cv_r2_std": 0.0016,
+  "trained_at": "2026-09-10T12:53:19.754630",
+  "version": "1.0.0",
+  "feature_importances": {
+    "previous_soil_moisture": 48.3,
+    "rainfall": 15.7,
+    "previous_irrigation_amount": 15.0,
+    "field_capacity": 4.6,
+    "hours_since_last_irrigation": 4.1,
+    "soil_type_Sandy": 3.8,
+    "wilting_point": 3.1,
+    "rain_probability": 2.9,
+    "root_zone_depth": 0.5,
+    "soil_type_Clay": 0.4,
+    "field_area": 0.3,
+    "temperature": 0.2,
+    "growth_stage_Mid-Season": 0.2,
+    "soil_type_Peat": 0.2,
+    "humidity": 0.2,
+    "growth_stage_Initial": 0.2,
+    "soil_type_Loamy": 0.1,
+    "available_water": 0.1,
+    "soil_type_Silt": 0.0,
+    "wind_speed": 0.0,
+    "crop_name_Cotton": 0.0,
+    "irrigation_method_Flood": 0.0,
+    "irrigation_method_Sub-irrigation": 0.0,
+    "crop_name_Potato": 0.0,
+    "crop_name_Rice": 0.0,
+    "irrigation_method_Drip": 0.0,
+    "crop_name_Corn": 0.0,
+    "crop_name_Soybean": 0.0,
+    "crop_name_Sugarcane": 0.0,
+    "crop_name_Tomato": 0.0,
+    "crop_name_Wheat": 0.0,
+    "growth_stage_Development": 0.0,
+    "growth_stage_Late-Season": 0.0,
+    "irrigation_method_Sprinkler": 0.0
+  },
+  "evaluation_comparison": {
+    "RandomForestRegressor": {
+      "mae": 1.146,
+      "rmse": 1.949,
+      "r2": 0.9814,
+      "cv_r2": 0.9763
+    },
+    "GradientBoostingRegressor": {
+      "mae": 1.016,
+      "rmse": 1.661,
+      "r2": 0.9865,
+      "cv_r2": 0.9821
+    }
+  }
+}

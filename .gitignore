@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Production builds
+dist/
+frontend/dist/
+build/
+
+# Python cache & virtualenvs
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+venv/
+env/
+.venv/
+*.db
+*.sqlite3
+
+# Environment & IDE
+.env
+.env.local
+.vscode/
+.idea/
+.DS_Store
