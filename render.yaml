@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: agricrop
+    runtime: python
+    plan: free
+    region: oregon
+    buildCommand: "cd frontend && npm install && npm run build && cd ../backend && pip install -r requirements.txt"
+    startCommand: "gunicorn --chdir backend --bind 0.0.0.0:$PORT --workers 2 --threads 4 app:app"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.8
+      - key: NODE_VERSION
+        value: 20.11.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: FLASK_ENV
+        value: production

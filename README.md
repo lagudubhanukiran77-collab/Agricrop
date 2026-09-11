@@ -55,22 +55,51 @@ HISTORY LOGS & WATER CONSERVATION ANALYTICS
 - Python 3.9+
 - Node.js 18+
 
-### 1. Backend Setup
+### 🚀 1-Command Production Launch (Recommended)
+Run the turnkey production launcher from the repository root:
+```powershell
+python run_production.py
+```
+*This command automatically verifies the production frontend bundle, starts the unified production WSGI server on port 5000, and immediately launches AgriCrop in your default web browser.*
+
+### 🛠️ Development Mode (Hot Reloading)
+
+#### 1. Backend Setup
 ```powershell
 cd backend
 pip install -r requirements.txt
 python app.py
 ```
-*The backend automatically seeds initial sample fields and trains the ML models on boot.*
+*The backend runs on http://127.0.0.1:5000 and automatically seeds initial sample fields and trains the ML models on boot.*
 
-### 2. Frontend Setup
+#### 2. Frontend Setup
 ```powershell
 cd frontend
 npm install
 npm run dev
 ```
+*The Vite hot-reloading dev server runs on http://localhost:3000.*
 
-Visit **http://localhost:3000** in your browser to access the AgriCrop platform.
+---
+
+## ☁️ Cloud & Container Deployment
+
+### 1. 1-Click Cloud Deployment (Render / Railway)
+AgriCrop is pre-configured with `render.yaml` and `Procfile`:
+1. Connect your repository to **[Render.com](https://render.com)**.
+2. Select **New Web Service** or **Blueprints**.
+3. Render automatically executes the multi-stage build (`npm run build` + `pip install`) and starts the Gunicorn production server with dynamic port binding.
+
+### 2. Docker & Docker Compose
+To run containerized anywhere:
+```bash
+docker compose up --build
+```
+Access the application at `http://localhost:5000`.
+
+### 3. GitHub Actions CI/CD
+Every commit pushed to `main` triggers `.github/workflows/deploy.yml` which builds the frontend bundle, verifies Python backend syntax and model artifacts, and tests production healthchecks automatically.
+
 
 ---
 

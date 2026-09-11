@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 from config import Config
 from database.db import db
@@ -19,8 +19,11 @@ from routes.water_routes import water_bp
 from routes.agent_routes import agent_bp
 from routes.auth_routes import auth_bp
 
+# Determine frontend distribution path
+DIST_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'frontend', 'dist'))
+
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder=None)
     app.config.from_object(Config)
 
     # Enable CORS for React frontend requests
@@ -43,14 +46,20 @@ def create_app():
     app.register_blueprint(agent_bp)
     app.register_blueprint(auth_bp)
 
+    @app.route('/api/health', methods=['GET'])
+    def health_check():
+        return jsonify({
+            'status': 'healthy',
+            'system': 'AgriCrop Intelligent Irrigation Engine',
+            'version': '1.0.0'
+        }), 200
 
-    @app.route('/', methods=['GET'])
-    def index():
+    @app.route('/api/info', methods=['GET'])
+    def api_info():
         return jsonify({
             'status': 'online',
             'system': 'AgriCrop Intelligent Irrigation & Water Management Engine REST API',
             'version': '1.0.0',
-            'frontend_ui': 'http://localhost:3000',
             'endpoints': {
                 'health': '/api/health',
                 'fields': '/api/fields',
@@ -67,13 +76,30 @@ def create_app():
             }
         }), 200
 
-    @app.route('/api/health', methods=['GET'])
-    def health_check():
+    @app.route('/', defaults={'path': ''})
+    @app.route('/<path:path>')
+    def serve_frontend(path):
+        # Do not intercept missing API routes
+        if path.startswith('api/') or path == 'api':
+            return jsonify({'error': 'API endpoint not found', 'path': f'/{path}'}), 404
+
+        # Serve static file if it exists directly in frontend dist
+        if path != "" and os.path.exists(os.path.join(DIST_DIR, path)):
+            return send_from_directory(DIST_DIR, path)
+
+        # Serve SPA index.html for client routes
+        index_path = os.path.join(DIST_DIR, 'index.html')
+        if os.path.exists(index_path):
+            return send_from_directory(DIST_DIR, 'index.html')
+
+        # Fallback if frontend is not built yet
         return jsonify({
-            'status': 'healthy',
-            'system': 'AgriCrop Intelligent Irrigation Engine',
-            'version': '1.0.0'
+            'status': 'online',
+            'message': 'AgriCrop Backend API is active. Frontend build not found in dist/.',
+            'endpoints_info': '/api/info',
+            'health': '/api/health'
         }), 200
+
 
     # Seed Database on Initial Startup
     with app.app_context():
@@ -202,5 +228,7 @@ def seed_initial_data():
 app = create_app()
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    debug = os.environ.get('FLASK_DEBUG', 'False').lower() in ('true', '1')
+    app.run(host='0.0.0.0', port=port, debug=debug)
 
