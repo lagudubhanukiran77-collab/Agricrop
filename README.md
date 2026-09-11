@@ -116,3 +116,4 @@ Visit **http://localhost:3000** in your browser to access the AgriCrop platform.
 
 ## 📄 License
 MIT License. Built for Intelligent Agriculture.
+"# Agricrop" 
