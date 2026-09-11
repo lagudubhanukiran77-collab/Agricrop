@@ -23,7 +23,7 @@ export default function FieldsPage({ fields, onSelectField, onOpenEnvModal, onOp
           className="btn btn-primary btn-sm"
         >
           <Plus size={16} />
-          <span>+ Create New Field</span>
+          <span>{t('createNewField', '+ Create New Field')}</span>
         </button>
       </div>
 
@@ -57,26 +57,26 @@ export default function FieldsPage({ fields, onSelectField, onOpenEnvModal, onOp
                     color: isCritical ? '#f87171' : '#34d399',
                     border: `1px solid ${isCritical ? 'rgba(239, 68, 68, 0.35)' : 'rgba(16, 185, 129, 0.35)'}`
                   }}>
-                    {isCritical ? 'CRITICAL STRESS' : 'OPTIMAL'}
+                    {isCritical ? t('criticalStress', 'CRITICAL STRESS') : t('optimal', 'OPTIMAL')}
                   </span>
                 </div>
 
                 {/* Field Details Grid */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', background: 'rgba(15, 23, 42, 0.75)', padding: '0.85rem', borderRadius: '12px', border: '1px solid rgba(99, 102, 241, 0.2)', marginBottom: '0.85rem' }}>
                   <div>
-                    <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 800, textTransform: 'uppercase', display: 'block', fontFamily: 'monospace' }}>AREA</span>
-                    <span style={{ fontSize: '0.88rem', fontWeight: 800, color: '#ffffff' }}>{field.area_hectares} Acres</span>
+                    <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 800, textTransform: 'uppercase', display: 'block', fontFamily: 'monospace' }}>{t('sectorArea', 'AREA')}</span>
+                    <span style={{ fontSize: '0.88rem', fontWeight: 800, color: '#ffffff' }}>{field.area_hectares} {t('acres', 'Acres')}</span>
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 800, textTransform: 'uppercase', display: 'block', fontFamily: 'monospace' }}>CROP TYPE</span>
+                    <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 800, textTransform: 'uppercase', display: 'block', fontFamily: 'monospace' }}>{t('sectorCrop', 'CROP TYPE')}</span>
                     <span style={{ fontSize: '0.88rem', fontWeight: 800, color: '#ffffff' }}>{crop.crop_name || 'Wheat'}</span>
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 800, textTransform: 'uppercase', display: 'block', fontFamily: 'monospace' }}>SOIL TYPE</span>
-                    <span style={{ fontSize: '0.88rem', fontWeight: 800, color: '#ffffff' }}>{field.soil_type} Soil</span>
+                    <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 800, textTransform: 'uppercase', display: 'block', fontFamily: 'monospace' }}>{t('sectorSoil', 'SOIL TYPE')}</span>
+                    <span style={{ fontSize: '0.88rem', fontWeight: 800, color: '#ffffff' }}>{field.soil_type} {t('soilSuffix', 'Soil')}</span>
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 800, textTransform: 'uppercase', display: 'block', fontFamily: 'monospace' }}>IRRIGATION</span>
+                    <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 800, textTransform: 'uppercase', display: 'block', fontFamily: 'monospace' }}>{t('sectorIrrigation', 'IRRIGATION')}</span>
                     <span style={{ fontSize: '0.88rem', fontWeight: 800, color: '#ffffff' }}>{field.irrigation_method}</span>
                   </div>
                 </div>
@@ -84,7 +84,7 @@ export default function FieldsPage({ fields, onSelectField, onOpenEnvModal, onOp
                 {/* Soil Moisture Bar */}
                 <div style={{ background: 'rgba(15, 23, 42, 0.75)', padding: '0.85rem', borderRadius: '12px', border: '1px solid rgba(99, 102, 241, 0.2)', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', fontWeight: 800 }}>
-                    <span style={{ color: '#94a3b8', fontFamily: 'monospace', textTransform: 'uppercase' }}>SOIL MOISTURE</span>
+                    <span style={{ color: '#94a3b8', fontFamily: 'monospace', textTransform: 'uppercase' }}>{t('sectorMoisture', 'SOIL MOISTURE')}</span>
                     <span style={{ color: isCritical ? '#f87171' : '#34d399', fontFamily: 'monospace' }}>{moisture}%</span>
                   </div>
                   <div style={{ width: '100%', height: '8px', background: 'rgba(30, 41, 59, 0.85)', borderRadius: '6px', overflow: 'hidden' }}>
@@ -113,13 +113,13 @@ export default function FieldsPage({ fields, onSelectField, onOpenEnvModal, onOp
                   style={{ flex: 1, justifyContent: 'center' }}
                 >
                   <Cpu size={14} />
-                  <span>Run AI Analyzer</span>
+                  <span>{t('runAIAnalyzer', 'Run AI Analyzer')}</span>
                 </button>
                 <button 
                   onClick={() => onOpenFieldModal(field)} 
                   className="btn btn-outline btn-sm"
                   style={{ padding: '6px 10px', color: '#38bdf8' }}
-                  title="Edit Field"
+                  title={t('editField', 'Edit Field')}
                 >
                   <Edit3 size={15} />
                 </button>
@@ -127,7 +127,7 @@ export default function FieldsPage({ fields, onSelectField, onOpenEnvModal, onOp
                   onClick={() => onDeleteField(field.id)} 
                   className="btn btn-outline btn-sm"
                   style={{ padding: '6px 10px', color: '#ef4444', borderColor: 'rgba(239, 68, 68, 0.4)' }}
-                  title="Delete Field"
+                  title={t('deleteField', 'Delete Field')}
                 >
                   <Trash2 size={15} />
                 </button>

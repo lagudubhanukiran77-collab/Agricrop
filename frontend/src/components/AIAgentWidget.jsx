@@ -257,7 +257,7 @@ export default function AIAgentWidget({ selectedField, onSelectField, setActiveT
                         <span className="badge badge-low">{msg.data_card.decision}</span>
                       </div>
                       <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                        Volume: {msg.data_card.volume_liters ? `${msg.data_card.volume_liters.toLocaleString()} L` : 'N/A'} • Duration: {msg.data_card.duration_minutes || 0} mins
+                        {t('recWaterVolume', 'Volume')}: {msg.data_card.volume_liters ? `${msg.data_card.volume_liters.toLocaleString()} L` : 'N/A'} • {t('duration', 'Duration')} {msg.data_card.duration_minutes || 0} {t('mins', 'mins')}
                       </div>
                     </div>
                   )}
@@ -265,7 +265,7 @@ export default function AIAgentWidget({ selectedField, onSelectField, setActiveT
                   {msg.data_card && msg.data_card.type === 'ML_METRICS_CARD' && (
                     <div style={{ marginTop: '0.6rem', padding: '0.6rem', background: 'rgba(0,0,0,0.3)', borderRadius: '8px', border: '1px solid var(--primary-glow)' }}>
                       <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--primary-light)', marginBottom: '4px' }}>
-                        Production Model: {msg.data_card.model_name}
+                        {t('selectedProdModel', 'Production Model')}: {msg.data_card.model_name}
                       </div>
                       <div style={{ display: 'flex', gap: '0.5rem', fontSize: '0.7rem' }}>
                         <span style={{ color: 'var(--primary-glow)', fontWeight: 700 }}>R²: {msg.data_card.r2_score}</span>
@@ -336,21 +336,21 @@ export default function AIAgentWidget({ selectedField, onSelectField, setActiveT
               onClick={() => handleSendMessage(t('promptWhichFields', 'Which fields need water right now?'))}
               style={{ fontSize: '0.68rem', padding: '2px 8px', whitespace: 'nowrap', flexShrink: 0 }}
             >
-              🌾 {t('quickPrompts', 'Quick Actions')} 1
+              🌾 {t('quickActionFields', 'Water Priority')}
             </button>
             <button
               className="btn btn-outline btn-sm"
               onClick={() => handleSendMessage(t('promptWeather', 'Get live hyper-local weather forecast'))}
               style={{ fontSize: '0.68rem', padding: '2px 8px', whitespace: 'nowrap', flexShrink: 0 }}
             >
-              🌤️ {t('quickPrompts', 'Quick Actions')} 2
+              🌤️ {t('quickActionWeather', 'Live Forecast')}
             </button>
             <button
               className="btn btn-outline btn-sm"
               onClick={() => handleSendMessage(t('promptMLModel', 'Inspect ML Soil Moisture Model performance'))}
               style={{ fontSize: '0.68rem', padding: '2px 8px', whitespace: 'nowrap', flexShrink: 0 }}
             >
-              🤖 {t('quickPrompts', 'Quick Actions')} 3
+              🤖 {t('quickActionModel', 'Model Specs')}
             </button>
           </div>
 

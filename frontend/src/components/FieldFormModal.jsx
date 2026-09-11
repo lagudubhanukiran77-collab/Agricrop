@@ -218,7 +218,7 @@ export default function FieldFormModal({ isOpen, onClose, onSubmit, initialData 
               <h2 style={{ fontSize: '1.15rem', fontWeight: 900, color: '#ffffff', margin: 0, lineHeight: 1.2 }}>
                 {initialData ? t('editFieldTitle', 'Edit Field & Crop Details') : t('createFieldTitle', 'Create New Farm Field')}
               </h2>
-              <span style={{ fontSize: '0.72rem', color: '#38bdf8', fontWeight: 600 }}>AgriCrop AI Automated FAO-56 Calibration Engine</span>
+              <span style={{ fontSize: '0.72rem', color: '#38bdf8', fontWeight: 600 }}>{t('automatedCalibrationEngine', 'AgriCrop AI Automated FAO-56 Calibration Engine')}</span>
             </div>
           </div>
           <button onClick={onClose} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#94a3b8', borderRadius: '8px', padding: '4px 8px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
@@ -233,11 +233,11 @@ export default function FieldFormModal({ isOpen, onClose, onSubmit, initialData 
             {/* COLUMN 1: FIELD IDENTITY & LOCATION */}
             <div style={{ background: 'rgba(6, 182, 212, 0.04)', padding: '0.9rem 1rem', borderRadius: '14px', border: '1px solid rgba(6, 182, 212, 0.2)', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
               <h4 style={{ fontSize: '0.74rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#06b6d4', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0 }}>
-                <MapPin size={14} /> FIELD IDENTITY & LOCATION
+                <MapPin size={14} /> {t('fieldIdentityLocation', 'FIELD IDENTITY & LOCATION')}
               </h4>
 
               <div>
-                <label style={{ fontSize: '0.74rem', fontWeight: 700, color: '#bae6fd', display: 'block', marginBottom: '3px' }}>Field Name</label>
+                <label style={{ fontSize: '0.74rem', fontWeight: 700, color: '#bae6fd', display: 'block', marginBottom: '3px' }}>{t('fieldNameLabel', 'Field Name')}</label>
                 <input 
                   type="text" 
                   className="form-control" 
@@ -246,13 +246,13 @@ export default function FieldFormModal({ isOpen, onClose, onSubmit, initialData 
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })} 
                   required 
                   minLength={3}
-                  placeholder="e.g. North Field"
+                  placeholder={t('placeholderFieldName', 'e.g. North Field')}
                 />
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
                 <div>
-                  <label style={{ fontSize: '0.74rem', fontWeight: 700, color: '#bae6fd', display: 'block', marginBottom: '3px' }}>Area (Acres)</label>
+                  <label style={{ fontSize: '0.74rem', fontWeight: 700, color: '#bae6fd', display: 'block', marginBottom: '3px' }}>{t('areaAcresLabel', 'Area (Acres)')}</label>
                   <input 
                     type="number" 
                     step="0.1" 
@@ -264,7 +264,7 @@ export default function FieldFormModal({ isOpen, onClose, onSubmit, initialData 
                   />
                 </div>
                 <div>
-                  <label style={{ fontSize: '0.74rem', fontWeight: 700, color: '#bae6fd', display: 'block', marginBottom: '3px' }}>Stored Water (L)</label>
+                  <label style={{ fontSize: '0.74rem', fontWeight: 700, color: '#bae6fd', display: 'block', marginBottom: '3px' }}>{t('storedWaterL', 'Stored Water (L)')}</label>
                   <input 
                     type="number" 
                     className="form-control" 
@@ -277,7 +277,7 @@ export default function FieldFormModal({ isOpen, onClose, onSubmit, initialData 
 
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3px' }}>
-                  <label style={{ fontSize: '0.74rem', fontWeight: 700, color: '#bae6fd' }}>Location / Village</label>
+                  <label style={{ fontSize: '0.74rem', fontWeight: 700, color: '#bae6fd' }}>{t('locationVillageLabel', 'Location / Village')}</label>
                   <button
                     type="button"
                     onClick={handleGetCurrentLocation}
@@ -285,7 +285,7 @@ export default function FieldFormModal({ isOpen, onClose, onSubmit, initialData 
                     style={{ background: 'rgba(6, 182, 212, 0.15)', border: '1px solid rgba(6, 182, 212, 0.4)', color: '#38bdf8', borderRadius: '6px', fontSize: '0.68rem', padding: '2px 6px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '3px' }}
                   >
                     {geolocating ? <Loader2 size={10} className="animate-spin" /> : <Compass size={10} />}
-                    <span>{geolocating ? 'GPS...' : '📍 Auto GPS'}</span>
+                    <span>{geolocating ? t('gpsAcquiring', 'GPS...') : t('autoGPS', '📍 Auto GPS')}</span>
                   </button>
                 </div>
 
@@ -294,7 +294,7 @@ export default function FieldFormModal({ isOpen, onClose, onSubmit, initialData 
                     type="text"
                     className="form-control"
                     style={{ background: 'rgba(30, 41, 59, 0.85)', borderColor: 'rgba(6, 182, 212, 0.35)', color: '#ffffff', fontSize: '0.82rem', padding: '0.45rem 0.75rem' }}
-                    placeholder="Search village or city..."
+                    placeholder={t('placeholderSearchVillage', 'Search village or city...')}
                     value={formData.location_name}
                     onChange={(e) => {
                       setFormData({ ...formData, location_name: e.target.value });
@@ -334,12 +334,12 @@ export default function FieldFormModal({ isOpen, onClose, onSubmit, initialData 
             {/* COLUMN 2: SOIL, CROP & IRRIGATION PARAMETERS */}
             <div style={{ background: 'rgba(6, 182, 212, 0.04)', padding: '0.9rem 1rem', borderRadius: '14px', border: '1px solid rgba(6, 182, 212, 0.2)', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
               <h4 style={{ fontSize: '0.74rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#06b6d4', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0 }}>
-                <Sprout size={14} /> SOIL, CROP & IRRIGATION
+                <Sprout size={14} /> {t('soilCropIrrigationHeader', 'SOIL, CROP & IRRIGATION')}
               </h4>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
                 <div>
-                  <label style={{ fontSize: '0.74rem', fontWeight: 700, color: '#bae6fd', display: 'block', marginBottom: '3px' }}>Soil Type</label>
+                  <label style={{ fontSize: '0.74rem', fontWeight: 700, color: '#bae6fd', display: 'block', marginBottom: '3px' }}>{t('soilTypeLabel', 'Soil Type')}</label>
                   <select 
                     className="form-control" 
                     style={{ background: 'rgba(30, 41, 59, 0.85)', borderColor: 'rgba(6, 182, 212, 0.35)', color: '#ffffff', fontSize: '0.82rem', padding: '0.45rem 0.75rem' }}
@@ -355,7 +355,7 @@ export default function FieldFormModal({ isOpen, onClose, onSubmit, initialData 
                 </div>
 
                 <div>
-                  <label style={{ fontSize: '0.74rem', fontWeight: 700, color: '#bae6fd', display: 'block', marginBottom: '3px' }}>Irrigation Method</label>
+                  <label style={{ fontSize: '0.74rem', fontWeight: 700, color: '#bae6fd', display: 'block', marginBottom: '3px' }}>{t('irrigationMethodLabel', 'Irrigation Method')}</label>
                   <select 
                     className="form-control" 
                     style={{ background: 'rgba(30, 41, 59, 0.85)', borderColor: 'rgba(6, 182, 212, 0.35)', color: '#ffffff', fontSize: '0.82rem', padding: '0.45rem 0.75rem' }}
@@ -372,7 +372,7 @@ export default function FieldFormModal({ isOpen, onClose, onSubmit, initialData 
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
                 <div>
-                  <label style={{ fontSize: '0.74rem', fontWeight: 700, color: '#bae6fd', display: 'block', marginBottom: '3px' }}>Crop Name</label>
+                  <label style={{ fontSize: '0.74rem', fontWeight: 700, color: '#bae6fd', display: 'block', marginBottom: '3px' }}>{t('cropNameLabel', 'Crop Name')}</label>
                   <select 
                     className="form-control" 
                     style={{ background: 'rgba(30, 41, 59, 0.85)', borderColor: 'rgba(6, 182, 212, 0.35)', color: '#ffffff', fontSize: '0.82rem', padding: '0.45rem 0.75rem' }}
@@ -391,7 +391,7 @@ export default function FieldFormModal({ isOpen, onClose, onSubmit, initialData 
                 </div>
 
                 <div>
-                  <label style={{ fontSize: '0.74rem', fontWeight: 700, color: '#bae6fd', display: 'block', marginBottom: '3px' }}>Growth Stage</label>
+                  <label style={{ fontSize: '0.74rem', fontWeight: 700, color: '#bae6fd', display: 'block', marginBottom: '3px' }}>{t('growthStageLabel', 'Growth Stage')}</label>
                   <select 
                     className="form-control" 
                     style={{ background: 'rgba(30, 41, 59, 0.85)', borderColor: 'rgba(6, 182, 212, 0.35)', color: '#ffffff', fontSize: '0.82rem', padding: '0.45rem 0.75rem' }}
@@ -407,7 +407,7 @@ export default function FieldFormModal({ isOpen, onClose, onSubmit, initialData 
               </div>
 
               <div>
-                <label style={{ fontSize: '0.74rem', fontWeight: 700, color: '#bae6fd', display: 'block', marginBottom: '3px' }}>Soil Moisture Fallback (%)</label>
+                <label style={{ fontSize: '0.74rem', fontWeight: 700, color: '#bae6fd', display: 'block', marginBottom: '3px' }}>{t('soilMoistureFallbackLabel', 'Soil Moisture Fallback (%)')}</label>
                 <input 
                   type="number" 
                   step="0.5"
@@ -425,7 +425,7 @@ export default function FieldFormModal({ isOpen, onClose, onSubmit, initialData 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid rgba(6, 182, 212, 0.25)', paddingTop: '0.75rem', marginTop: '0.2rem' }}>
             <div style={{ fontSize: '0.72rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
               <ShieldCheck size={16} color="#34d399" />
-              <span>AgriCrop AI automatically calculates soil physics & FAO-56 Penman-Monteith ET0.</span>
+              <span>{t('autoCalculateSoilPhysics', 'AgriCrop AI automatically calculates soil physics & FAO-56 Penman-Monteith ET0.')}</span>
             </div>
 
             <div style={{ display: 'flex', gap: '0.65rem' }}>

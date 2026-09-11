@@ -42,7 +42,7 @@ export default function WeatherCard({ fieldId, onWeatherUpdated }) {
       <div className="bg-slate-800/80 border border-slate-700/60 rounded-xl p-5 shadow-lg animate-pulse min-h-[220px] flex items-center justify-center">
         <div className="text-slate-400 text-sm flex items-center space-x-2">
           <RefreshCw className="w-4 h-4 animate-spin text-emerald-400" />
-          <span>Fetching hyper-local Open-Meteo live weather...</span>
+          <span>{t('fetchingLiveWeather', 'Fetching hyper-local Open-Meteo live weather...')}</span>
         </div>
       </div>
     );
@@ -53,7 +53,7 @@ export default function WeatherCard({ fieldId, onWeatherUpdated }) {
       <div className="bg-slate-800/80 border border-slate-700/60 rounded-xl p-5 shadow-lg">
         <div className="text-slate-400 text-sm flex items-center space-x-2 text-rose-400">
           <AlertCircle className="w-4 h-4" />
-          <span>{error || "No weather data available."}</span>
+          <span>{error || t('noWeatherData', 'No weather data available.')}</span>
         </div>
       </div>
     );
@@ -72,7 +72,7 @@ export default function WeatherCard({ fieldId, onWeatherUpdated }) {
           </div>
           <div>
             <h3 className="text-sm font-semibold text-slate-200">{t('liveHyperLocalWeather')}</h3>
-            <p className="text-xs text-slate-400">Open-Meteo Satellite & Station Data</p>
+            <p className="text-xs text-slate-400">{t('openMeteoSource', 'Open-Meteo Satellite & Station Data')}</p>
           </div>
         </div>
 
@@ -113,7 +113,7 @@ export default function WeatherCard({ fieldId, onWeatherUpdated }) {
             <Droplets className="w-3.5 h-3.5 text-blue-400 mr-1" /> {t('humidity')}
           </div>
           <div className="text-lg font-bold text-slate-100">{weather.humidity_pct}%</div>
-          <div className="text-[11px] text-slate-400">Relative Humidity</div>
+          <div className="text-[11px] text-slate-400">{t('relativeHumidity', 'Relative Humidity')}</div>
         </div>
 
         <div className="bg-slate-900/60 p-3 rounded-lg border border-slate-700/40">
@@ -121,7 +121,7 @@ export default function WeatherCard({ fieldId, onWeatherUpdated }) {
             <CloudRain className="w-3.5 h-3.5 text-indigo-400 mr-1" /> {t('rainProbability')}
           </div>
           <div className="text-lg font-bold text-slate-100">{weather.rain_probability_pct}%</div>
-          <div className="text-[11px] text-slate-400">{weather.rainfall_mm} mm expected</div>
+          <div className="text-[11px] text-slate-400">{weather.rainfall_mm} mm {t('expectedLower', 'expected')}</div>
         </div>
 
         <div className="bg-slate-900/60 p-3 rounded-lg border border-slate-700/40">
@@ -129,7 +129,7 @@ export default function WeatherCard({ fieldId, onWeatherUpdated }) {
             <Wind className="w-3.5 h-3.5 text-teal-400 mr-1" /> {t('windSpeed')}
           </div>
           <div className="text-lg font-bold text-slate-100">{weather.wind_speed_kmh} <span className="text-xs font-normal">km/h</span></div>
-          <div className="text-[11px] text-slate-400">Surface Wind</div>
+          <div className="text-[11px] text-slate-400">{t('surfaceWind', 'Surface Wind')}</div>
         </div>
       </div>
 
@@ -137,11 +137,11 @@ export default function WeatherCard({ fieldId, onWeatherUpdated }) {
         <div className="mt-3 pt-3 border-t border-slate-700/40">
           <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
             <span className="flex items-center font-medium text-slate-300">
-              <Calendar className="w-3.5 h-3.5 mr-1 text-slate-400" /> 5-Day Precipitation Forecast
+              <Calendar className="w-3.5 h-3.5 mr-1 text-slate-400" /> {t('precipitationForecast', '5-Day Precipitation Forecast')}
             </span>
             {weather.timestamp && (
               <span className="text-[10px] text-slate-500">
-                Last updated: {new Date(weather.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                {t('lastUpdated', 'Last updated')}: {new Date(weather.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
               </span>
             )}
           </div>

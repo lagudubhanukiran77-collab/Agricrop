@@ -213,7 +213,7 @@ export default function WelcomeBanner({ user, totalFields, healthyFields, requir
               padding: '2px 8px',
               borderRadius: '6px'
             }}>
-              🌾 {totalFields || 4} Fields Tracked
+              🌾 {totalFields || 4} {t('fieldsTracked', 'Fields Tracked')}
             </span>
             <span style={{
               background: requiringIrrigation > 0 ? 'rgba(239, 68, 68, 0.15)' : 'rgba(16, 185, 129, 0.15)',
@@ -224,7 +224,7 @@ export default function WelcomeBanner({ user, totalFields, healthyFields, requir
               padding: '2px 8px',
               borderRadius: '6px'
             }}>
-              {requiringIrrigation > 0 ? `⚠️ ${requiringIrrigation} Needs Water` : '✅ All Optimal'}
+              {requiringIrrigation > 0 ? `⚠️ ${requiringIrrigation} ${t('needsWater', 'Needs Water')}` : `✅ ${t('allOptimalBadge', 'All Optimal')}`}
             </span>
           </div>
         </div>

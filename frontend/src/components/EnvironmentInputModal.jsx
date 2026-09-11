@@ -61,7 +61,7 @@ export default function EnvironmentInputModal({ isOpen, onClose, field, onSubmit
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.75rem' }}>
           <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--water-cyan)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Radio size={20} />
-            Environmental & IoT Sensor Input for '{field.name}'
+            {t('envModalTitle', 'Environmental & IoT Sensor Input for')} '{field.name}'
           </h2>
           <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}>
             <X size={20} />
@@ -145,7 +145,7 @@ export default function EnvironmentInputModal({ isOpen, onClose, field, onSubmit
           <div className="grid-2">
             <div className="form-group">
               <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <CloudRain size={14} color="#06b6d4" /> Expected Rainfall (mm)
+                <CloudRain size={14} color="#06b6d4" /> {t('expectedRainfall', 'Expected Rainfall (mm)')}
               </label>
               <input 
                 type="number" 

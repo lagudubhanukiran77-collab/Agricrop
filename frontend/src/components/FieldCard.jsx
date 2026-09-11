@@ -74,7 +74,7 @@ export default function FieldCard({ field, onSelect, onOpenEnvModal, onEdit, onD
               <MapPin size={13} color="#06b6d4" />
               <span>{field.location_name || field.location || 'Sector 1'}</span>
               <span style={{ color: 'rgba(148, 163, 184, 0.4)' }}>•</span>
-              <span style={{ color: '#38bdf8', fontWeight: 700 }}>{field.area_hectares} Acres</span>
+              <span style={{ color: '#38bdf8', fontWeight: 700 }}>{field.area_hectares} {t('acres', 'Acres')}</span>
             </p>
           </div>
           <div style={{ display: 'flex', gap: '0.35rem' }}>
@@ -128,16 +128,16 @@ export default function FieldCard({ field, onSelect, onOpenEnvModal, onEdit, onD
             marginTop: '0.65rem',
             display: 'flex',
             alignItems: 'center',
-            justify: 'space-between'
+            justifyContent: 'space-between'
           }}>
             <div>
-              <span style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>CROP</span>
+              <span style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>{t('cardCrop', 'CROP')}</span>
               <div style={{ fontSize: '0.92rem', fontWeight: 800, color: '#ffffff' }}>
                 🌾 {crop.crop_name} <span style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 600 }}>({crop.variety || 'Hybrid'})</span>
               </div>
             </div>
             <div style={{ textAlign: 'right' }}>
-              <span style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>STAGE</span>
+              <span style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>{t('cardStage', 'STAGE')}</span>
               <div style={{ fontSize: '0.85rem', fontWeight: 800, color: '#34d399' }}>{crop.growth_stage}</div>
             </div>
           </div>
@@ -149,7 +149,7 @@ export default function FieldCard({ field, onSelect, onOpenEnvModal, onEdit, onD
         {/* Estimated Soil Moisture Box */}
         <div style={{ textAlign: 'center', position: 'relative' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '3px', color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
-            <Droplets size={13} color="#38bdf8" /> Est. Moisture
+            <Droplets size={13} color="#38bdf8" /> {t('estMoisture', 'Est. Moisture')}
             <span 
               title="Estimated using weather conditions, crop information, soil characteristics, irrigation history, and other available field data."
               style={{ cursor: 'help', color: '#94a3b8' }}
@@ -161,14 +161,14 @@ export default function FieldCard({ field, onSelect, onOpenEnvModal, onEdit, onD
             {estimatedMoisture}%
           </div>
           <div style={{ fontSize: '0.64rem', color: '#06b6d4', fontWeight: 800 }}>
-            AI Estimated
+            {t('aiEstimatedBadge', 'AI Estimated')}
           </div>
         </div>
 
         {/* Live Location Temperature Box */}
         <div style={{ textAlign: 'center', borderLeft: '1px solid rgba(6, 182, 212, 0.3)', borderRight: '1px solid rgba(6, 182, 212, 0.3)', background: 'rgba(249, 115, 22, 0.12)', borderRadius: '8px', padding: '2px 0' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '3px', color: '#fbbf24', fontSize: '0.75rem', fontWeight: 800 }}>
-            <Thermometer size={13} color="#fbbf24" className="animate-bounce" /> Live Temp
+            <Thermometer size={13} color="#fbbf24" className="animate-bounce" /> {t('liveTempBox', 'Live Temp')}
           </div>
           <div style={{ fontSize: '1.2rem', fontWeight: 900, color: '#ffffff', marginTop: '2px' }}>
             {liveTemp}°C
@@ -181,13 +181,13 @@ export default function FieldCard({ field, onSelect, onOpenEnvModal, onEdit, onD
         {/* Humidity Box */}
         <div style={{ textAlign: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '3px', color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
-            <Wind size={13} color="#38bdf8" /> Humidity
+            <Wind size={13} color="#38bdf8" /> {t('humidity', 'Humidity')}
           </div>
           <div style={{ fontSize: '1.2rem', fontWeight: 900, color: '#ffffff', marginTop: '2px' }}>
             {humidity}%
           </div>
           <div style={{ fontSize: '0.64rem', color: '#94a3b8', fontWeight: 600 }}>
-            Relative
+            {t('relative', 'Relative')}
           </div>
         </div>
       </div>
@@ -195,7 +195,7 @@ export default function FieldCard({ field, onSelect, onOpenEnvModal, onEdit, onD
       {/* Soil Moisture Progress Meter */}
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700, marginBottom: '4px' }}>
-          <span>Estimated Soil Moisture</span>
+          <span>{t('estimatedSoilMoisture', 'Estimated Soil Moisture')}</span>
           <span style={{ color: '#ffffff' }}>{estimatedMoisture}%</span>
         </div>
         <div style={{ width: '100%', height: '9px', background: 'rgba(30, 41, 59, 0.85)', borderRadius: '6px', overflow: 'hidden', border: '1px solid rgba(6, 182, 212, 0.4)' }}>
@@ -210,7 +210,7 @@ export default function FieldCard({ field, onSelect, onOpenEnvModal, onEdit, onD
         </div>
         {lastUpdated && (
           <div style={{ fontSize: '0.65rem', color: '#64748b', marginTop: '4px', textAlign: 'right', fontWeight: 600 }}>
-            Synced: {lastUpdated}
+            {t('syncedAt', 'Synced')}: {lastUpdated}
           </div>
         )}
       </div>
@@ -222,7 +222,7 @@ export default function FieldCard({ field, onSelect, onOpenEnvModal, onEdit, onD
           style={{ flex: 1 }}
           onClick={() => onOpenEnvModal(field)}
         >
-          {t('editField', 'Update Data')}
+          {t('updateDataBtn', 'Update Data')}
         </button>
         <button 
           className="btn btn-primary btn-sm"
@@ -230,7 +230,7 @@ export default function FieldCard({ field, onSelect, onOpenEnvModal, onEdit, onD
           onClick={() => onSelect(field)}
         >
           <Cpu size={14} />
-          {t('viewIntelligence', 'Analyze AI')}
+          {t('analyzeAI', 'Analyze AI')}
         </button>
       </div>
     </div>

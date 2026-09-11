@@ -59,7 +59,7 @@ export default function LoginPage({ onLogin }) {
     const password = formData.password.trim();
 
     if (!email || !password) {
-      setErrorMessage('Please enter both email and password.');
+      setErrorMessage(t('errEnterEmailPass', 'Please enter both email and password.'));
       setLoading(false);
       return;
     }
@@ -67,19 +67,19 @@ export default function LoginPage({ onLogin }) {
     if (isSignUp) {
       // --- REGISTRATION FLOW ---
       if (!formData.name.trim()) {
-        setErrorMessage('Full Name is required for registration.');
+        setErrorMessage(t('errNameRequired', 'Full Name is required for registration.'));
         setLoading(false);
         return;
       }
 
       if (!email.includes('@') || !email.includes('.')) {
-        setErrorMessage('Please enter a valid email address.');
+        setErrorMessage(t('errValidEmail', 'Please enter a valid email address.'));
         setLoading(false);
         return;
       }
 
       if (password.length < 6) {
-        setErrorMessage('Password must be at least 6 characters long.');
+        setErrorMessage(t('errPassLength', 'Password must be at least 6 characters long.'));
         setLoading(false);
         return;
       }
@@ -91,13 +91,13 @@ export default function LoginPage({ onLogin }) {
           password,
           location: 'D. Yerravaram, East Godavari'
         });
-        setSuccessMessage('Registration successful! Signing you in...');
+        setSuccessMessage(t('msgRegSuccess', 'Registration successful! Signing you in...'));
         setTimeout(() => onLogin(apiRes.user), 1000);
       } catch (err) {
         const currentUsers = getRegisteredUsers();
         const existing = currentUsers.find(u => u.email.toLowerCase() === email);
         if (existing) {
-          setErrorMessage('This email is already registered. Please sign in instead.');
+          setErrorMessage(t('errEmailExists', 'This email is already registered. Please sign in instead.'));
           setLoading(false);
           return;
         }
@@ -112,7 +112,7 @@ export default function LoginPage({ onLogin }) {
 
         currentUsers.push(newUser);
         saveRegisteredUsers(currentUsers);
-        setSuccessMessage('Account registered successfully! Signing you in...');
+        setSuccessMessage(t('msgRegSuccess', 'Registration successful! Signing you in...'));
         setTimeout(() => {
           onLogin({ name: newUser.name, email: newUser.email, location: newUser.location, role: newUser.role });
         }, 1000);
@@ -129,7 +129,7 @@ export default function LoginPage({ onLogin }) {
         if (matchedUser) {
           onLogin({ name: matchedUser.name, email: matchedUser.email, location: matchedUser.location || 'D. Yerravaram, East Godavari', role: matchedUser.role });
         } else {
-          setErrorMessage('Invalid email or password. Access denied. Please check your credentials or create a new account.');
+          setErrorMessage(t('errInvalidCredentials', 'Invalid email or password. Access denied. Please check your credentials or create a new account.'));
           setLoading(false);
         }
       }
@@ -165,9 +165,9 @@ export default function LoginPage({ onLogin }) {
           </div>
           <div>
             <h1 style={{ fontSize: '1.35rem', fontWeight: 800, letterSpacing: '-0.02em', color: '#ffffff', lineHeight: 1 }}>
-              AgriCrop AI Engine
+              {t('loginBrandTitle', 'AgriCrop AI Engine')}
             </h1>
-            <p style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '2px' }}>Precision Water Intelligence</p>
+            <p style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '2px' }}>{t('loginBrandSubtitle', 'Precision Water Intelligence')}</p>
           </div>
         </div>
 
@@ -203,7 +203,7 @@ export default function LoginPage({ onLogin }) {
             {isSignUp ? <UserPlus size={22} /> : <LogIn size={22} />}
           </div>
           <h2 style={{ fontSize: '1.35rem', fontWeight: 900, color: '#ffffff', textAlign: 'center' }}>
-            {isSignUp ? 'Farmer Registration' : 'Farmer Sign In'}
+            {isSignUp ? t('farmerRegistration', 'Farmer Registration') : t('farmerSignIn', 'Farmer Sign In')}
           </h2>
         </div>
 
@@ -250,11 +250,11 @@ export default function LoginPage({ onLogin }) {
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {isSignUp && (
             <div className="form-group">
-              <label className="form-label">Full Name</label>
+              <label className="form-label">{t('fullName', 'Full Name')}</label>
               <input 
                 type="text" 
                 className="form-control" 
-                placeholder="e.g. Ramesh Patel" 
+                placeholder={t('fullNamePlaceholder', 'e.g. Ramesh Patel')} 
                 value={formData.name} 
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })} 
                 required 
@@ -263,11 +263,11 @@ export default function LoginPage({ onLogin }) {
           )}
 
           <div className="form-group">
-            <label className="form-label">Email Address</label>
+            <label className="form-label">{t('emailAddress', 'Email Address')}</label>
             <input 
               type="email" 
               className="form-control" 
-              placeholder="e.g. farmer@agricrop.ai" 
+              placeholder={t('emailPlaceholder', 'e.g. farmer@agricrop.ai')} 
               value={formData.email} 
               onChange={(e) => setFormData({ ...formData, email: e.target.value })} 
               required 
@@ -275,7 +275,7 @@ export default function LoginPage({ onLogin }) {
           </div>
 
           <div className="form-group">
-            <label className="form-label">Password</label>
+            <label className="form-label">{t('password', 'Password')}</label>
             <input 
               type="password" 
               className="form-control" 
@@ -292,7 +292,7 @@ export default function LoginPage({ onLogin }) {
             className="btn btn-primary" 
             style={{ width: '100%', justifyContent: 'center', padding: '0.75rem', fontSize: '0.92rem', marginTop: '0.25rem' }}
           >
-            {loading ? 'Validating...' : (isSignUp ? 'Create Farmer Account' : 'Sign In to Dashboard')}
+            {loading ? t('validating', 'Validating...') : (isSignUp ? t('createAccountBtn', 'Create Farmer Account') : t('signInBtn', 'Sign In to Dashboard'))}
           </button>
         </form>
 
@@ -306,14 +306,14 @@ export default function LoginPage({ onLogin }) {
             }} 
             style={{ background: 'transparent', border: 'none', color: '#38bdf8', fontWeight: 800, cursor: 'pointer', textDecoration: 'underline' }}
           >
-            {isSignUp ? 'Already registered? Sign In' : 'New Farmer? Create Account'}
+            {isSignUp ? t('alreadyRegistered', 'Already registered? Sign In') : t('newFarmerCreate', 'New Farmer? Create Account')}
           </button>
         </div>
       </div>
 
       {/* Footer */}
       <footer style={{ textAlign: 'center', fontSize: '0.8rem', color: '#94a3b8', padding: '0.75rem 0' }}>
-        AgriCrop AI Engine • Precision Water Intelligence Platform
+        {t('loginFooter', 'AgriCrop AI Engine • Precision Water Intelligence Platform')}
       </footer>
     </div>
   );

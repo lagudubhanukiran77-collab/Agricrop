@@ -47,10 +47,10 @@ export default function IntelligencePage({ fields, selectedField, setSelectedFie
   const cycleDurationMins = (rawMins && rawMins > 0) ? rawMins : Math.round(waterVolumeLiters / 80);
 
   const getDecisionBadgeStyle = (d) => {
-    if (d === 'Irrigate Now') return { bg: 'rgba(239, 68, 68, 0.15)', color: '#f87171', border: 'rgba(239, 68, 68, 0.35)', text: 'IRRIGATE NOW' };
-    if (d === 'Irrigate Later') return { bg: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24', border: 'rgba(245, 158, 11, 0.35)', text: 'IRRIGATE LATER' };
-    if (d === 'Do Not Irrigate') return { bg: 'rgba(16, 185, 129, 0.15)', color: '#34d399', border: 'rgba(16, 185, 129, 0.35)', text: 'DO NOT IRRIGATE' };
-    return { bg: 'rgba(6, 182, 212, 0.15)', color: '#38bdf8', border: 'rgba(6, 182, 212, 0.35)', text: 'MONITOR FIELD' };
+    if (d === 'Irrigate Now') return { bg: 'rgba(239, 68, 68, 0.15)', color: '#f87171', border: 'rgba(239, 68, 68, 0.35)', text: t('irrigateNowUpper', 'IRRIGATE NOW') };
+    if (d === 'Irrigate Later') return { bg: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24', border: 'rgba(245, 158, 11, 0.35)', text: t('irrigateLaterUpper', 'IRRIGATE LATER') };
+    if (d === 'Do Not Irrigate') return { bg: 'rgba(16, 185, 129, 0.15)', color: '#34d399', border: 'rgba(16, 185, 129, 0.35)', text: t('doNotIrrigateUpper', 'DO NOT IRRIGATE') };
+    return { bg: 'rgba(6, 182, 212, 0.15)', color: '#38bdf8', border: 'rgba(6, 182, 212, 0.35)', text: t('monitorFieldUpper', 'MONITOR FIELD') };
   };
 
   const badgeStyle = getDecisionBadgeStyle(decision);
@@ -63,10 +63,10 @@ export default function IntelligencePage({ fields, selectedField, setSelectedFie
           <div>
             <h2 style={{ fontSize: '1.25rem', fontWeight: 900, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Cpu size={24} color="#06b6d4" />
-              AI PRECISION IRRIGATION & WATER STRESS ENGINE
+              {t('intelligenceTitle', 'AI PRECISION IRRIGATION & WATER STRESS ENGINE')}
             </h2>
             <p style={{ fontSize: '0.82rem', color: '#94a3b8', marginTop: '4px' }}>
-              Live Open-Meteo weather telemetry combined with Scikit-Learn ML regression & FAO-56 Penman-Monteith calculations.
+              {t('intelligenceSub', 'Live Open-Meteo weather telemetry combined with Scikit-Learn ML regression & FAO-56 Penman-Monteith calculations.')}
             </p>
           </div>
 
@@ -77,14 +77,14 @@ export default function IntelligencePage({ fields, selectedField, setSelectedFie
             style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', padding: '0.45rem 0.9rem' }}
           >
             <RefreshCw size={14} className={loading ? 'animate-spin' : ''} />
-            <span>{loading ? 'Recalculating AI...' : 'Run Live Analysis'}</span>
+            <span>{loading ? t('recalculatingAI', 'Recalculating AI...') : t('runLiveAnalysis', 'Run Live Analysis')}</span>
           </button>
         </div>
         
         {/* Field Selector Chips */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1rem', flexWrap: 'wrap' }}>
           <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#06b6d4', textTransform: 'uppercase', fontFamily: 'monospace', marginRight: '0.35rem' }}>
-            SELECT FIELD:
+            {t('selectFieldLabel', 'SELECT FIELD:')}
           </span>
           {fields.map(f => {
             const isSel = activeField && activeField.id === f.id;
@@ -123,8 +123,8 @@ export default function IntelligencePage({ fields, selectedField, setSelectedFie
                     <BrainCircuit size={22} />
                   </div>
                   <div>
-                    <h3 style={{ fontSize: '1.15rem', fontWeight: 900, color: '#ffffff' }}>FAO-56 AGRONOMIC DECISION</h3>
-                    <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Target Field: <strong style={{ color: '#38bdf8' }}>{activeField.name}</strong> ({activeField.crop?.crop_name || 'Wheat'})</span>
+                    <h3 style={{ fontSize: '1.15rem', fontWeight: 900, color: '#ffffff' }}>{t('faoDecision', 'FAO-56 AGRONOMIC DECISION')}</h3>
+                    <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>{t('targetField', 'Target Field:')} <strong style={{ color: '#38bdf8' }}>{activeField.name}</strong> ({activeField.crop?.crop_name || 'Wheat'})</span>
                   </div>
                 </div>
                 <span style={{
@@ -145,33 +145,33 @@ export default function IntelligencePage({ fields, selectedField, setSelectedFie
               {loading ? (
                 <div style={{ padding: '2rem', textAlign: 'center', color: '#38bdf8' }}>
                   <Loader2 size={28} className="animate-spin" style={{ margin: '0 auto 0.75rem auto' }} />
-                  <p style={{ fontSize: '0.88rem', fontWeight: 700 }}>Calculating FAO-56 Penman-Monteith physics & ML Regressor model...</p>
+                  <p style={{ fontSize: '0.88rem', fontWeight: 700 }}>{t('calculatingModel', 'Calculating FAO-56 Penman-Monteith physics & ML Regressor model...')}</p>
                 </div>
               ) : (
                 <>
                   {/* Recommendation Specifications Grid */}
                   <h4 style={{ fontSize: '0.82rem', fontWeight: 800, color: '#06b6d4', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.65rem', fontFamily: 'monospace' }}>
-                    REAL BACKEND CALCULATED PARAMETERS
+                    {t('backendCalcParams', 'REAL BACKEND CALCULATED PARAMETERS')}
                   </h4>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.85rem', background: 'rgba(15, 23, 42, 0.75)', padding: '1rem', borderRadius: '14px', border: '1px solid rgba(99, 102, 241, 0.2)', marginBottom: '1rem' }}>
                     <div>
-                      <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 800, display: 'block', fontFamily: 'monospace', textTransform: 'uppercase' }}>ESTIMATED MOISTURE</span>
+                      <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 800, display: 'block', fontFamily: 'monospace', textTransform: 'uppercase' }}>{t('estimatedMoistureUpper', 'ESTIMATED MOISTURE')}</span>
                       <span style={{ fontSize: '1.25rem', fontWeight: 900, color: currentMoisture < 23 ? '#f87171' : '#34d399', fontFamily: 'monospace' }}>{currentMoisture}%</span>
                     </div>
                     <div>
-                      <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 800, display: 'block', fontFamily: 'monospace', textTransform: 'uppercase' }}>REQUIRED WATER</span>
+                      <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 800, display: 'block', fontFamily: 'monospace', textTransform: 'uppercase' }}>{t('requiredWaterUpper', 'REQUIRED WATER')}</span>
                       <span style={{ fontSize: '1.25rem', fontWeight: 900, color: '#38bdf8', fontFamily: 'monospace' }}>
                         {waterVolumeLiters.toLocaleString()} L
                       </span>
                     </div>
                     <div>
-                      <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 800, display: 'block', fontFamily: 'monospace', textTransform: 'uppercase' }}>CYCLE DURATION</span>
+                      <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 800, display: 'block', fontFamily: 'monospace', textTransform: 'uppercase' }}>{t('cycleDurationUpper', 'CYCLE DURATION')}</span>
                       <span style={{ fontSize: '1.25rem', fontWeight: 900, color: '#c4b5fd', fontFamily: 'monospace' }}>
-                        {cycleDurationMins} mins
+                        {cycleDurationMins} {t('mins', 'mins')}
                       </span>
                     </div>
                     <div>
-                      <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 800, display: 'block', fontFamily: 'monospace', textTransform: 'uppercase' }}>OPTIMAL WINDOW</span>
+                      <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 800, display: 'block', fontFamily: 'monospace', textTransform: 'uppercase' }}>{t('optimalWindowUpper', 'OPTIMAL WINDOW')}</span>
                       <span style={{ fontSize: '1.05rem', fontWeight: 800, color: '#f59e0b', fontFamily: 'monospace', lineHeight: 1.2 }}>
                         {analysisResult?.recommended_time || 'Evening (17:30 - 19:30)'}
                       </span>
@@ -182,7 +182,7 @@ export default function IntelligencePage({ fields, selectedField, setSelectedFie
                   <div style={{ background: 'rgba(15, 23, 42, 0.75)', padding: '0.95rem 1.15rem', borderRadius: '12px', border: '1px solid rgba(99, 102, 241, 0.2)', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#06b6d4', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                       <Sparkles size={16} color="#34d399" />
-                      <span>AI Model Explainable Rationale:</span>
+                      <span>{t('aiRationaleTitle', 'AI Model Explainable Rationale:')}</span>
                     </div>
 
                     {analysisResult?.reasons && analysisResult.reasons.length > 0 ? (
@@ -205,13 +205,13 @@ export default function IntelligencePage({ fields, selectedField, setSelectedFie
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', paddingTop: '0.85rem', borderTop: '1px solid rgba(99, 102, 241, 0.2)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.8rem', color: '#34d399', fontWeight: 800 }}>
                 <CheckCircle2 size={16} />
-                <span>Verified by FAO-56 Penman-Monteith ML Engine ({analysisResult?.confidence_score || 85}% Confidence)</span>
+                <span>{t('verifiedByFao', 'Verified by FAO-56 Penman-Monteith ML Engine')} ({analysisResult?.confidence_score || 85}% {t('aiConfidence', 'Confidence')})</span>
               </div>
               <button 
                 className="btn btn-primary btn-sm"
-                onClick={() => alert(`Irrigation command dispatched for field: ${activeField.name}`)}
+                onClick={() => alert(`${t('commandDispatched', 'Irrigation command dispatched for field:')} ${activeField.name}`)}
               >
-                <span>Execute Irrigation Cycle Now</span>
+                <span>{t('executeIrrigationNow', 'Execute Irrigation Cycle Now')}</span>
                 <ArrowRight size={15} />
               </button>
             </div>
@@ -221,28 +221,28 @@ export default function IntelligencePage({ fields, selectedField, setSelectedFie
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
             <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               <h3 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#06b6d4', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: 'monospace' }}>
-                FIELD SPECIFICATIONS
+                {t('fieldSpecifications', 'FIELD SPECIFICATIONS')}
               </h3>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', fontSize: '0.8rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', background: 'rgba(15, 23, 42, 0.75)', padding: '0.6rem 0.85rem', borderRadius: '8px', border: '1px solid rgba(99, 102, 241, 0.15)' }}>
-                  <span style={{ color: '#94a3b8' }}>Area:</span>
-                  <strong style={{ color: '#ffffff', fontFamily: 'monospace' }}>{activeField.area_hectares} Acres</strong>
+                  <span style={{ color: '#94a3b8' }}>{t('fieldArea', 'Area:')}</span>
+                  <strong style={{ color: '#ffffff', fontFamily: 'monospace' }}>{activeField.area_hectares} {t('acres', 'Acres')}</strong>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', background: 'rgba(15, 23, 42, 0.75)', padding: '0.6rem 0.85rem', borderRadius: '8px', border: '1px solid rgba(99, 102, 241, 0.15)' }}>
-                  <span style={{ color: '#94a3b8' }}>Soil Type:</span>
-                  <strong style={{ color: '#ffffff', fontFamily: 'monospace' }}>{activeField.soil_type || 'Loamy'} Soil</strong>
+                  <span style={{ color: '#94a3b8' }}>{t('fieldSoilType', 'Soil Type:')}</span>
+                  <strong style={{ color: '#ffffff', fontFamily: 'monospace' }}>{activeField.soil_type || 'Loamy'} {t('soilSuffix', 'Soil')}</strong>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', background: 'rgba(15, 23, 42, 0.75)', padding: '0.6rem 0.85rem', borderRadius: '8px', border: '1px solid rgba(99, 102, 241, 0.15)' }}>
-                  <span style={{ color: '#94a3b8' }}>Irrigation Method:</span>
+                  <span style={{ color: '#94a3b8' }}>{t('fieldIrrigationMethod', 'Irrigation Method:')}</span>
                   <strong style={{ color: '#ffffff', fontFamily: 'monospace' }}>{activeField.irrigation_method || 'Drip'}</strong>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', background: 'rgba(15, 23, 42, 0.75)', padding: '0.6rem 0.85rem', borderRadius: '8px', border: '1px solid rgba(99, 102, 241, 0.15)' }}>
-                  <span style={{ color: '#94a3b8' }}>Crop Type:</span>
+                  <span style={{ color: '#94a3b8' }}>{t('fieldCropType', 'Crop Type:')}</span>
                   <strong style={{ color: '#ffffff', fontFamily: 'monospace' }}>{activeField.crop?.crop_name || 'Wheat'}</strong>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', background: 'rgba(15, 23, 42, 0.75)', padding: '0.6rem 0.85rem', borderRadius: '8px', border: '1px solid rgba(99, 102, 241, 0.15)' }}>
-                  <span style={{ color: '#94a3b8' }}>Growth Stage:</span>
+                  <span style={{ color: '#94a3b8' }}>{t('fieldGrowthStage', 'Growth Stage:')}</span>
                   <strong style={{ color: '#ffffff', fontFamily: 'monospace' }}>{activeField.crop?.growth_stage || 'Mid-Season'}</strong>
                 </div>
               </div>
@@ -250,23 +250,23 @@ export default function IntelligencePage({ fields, selectedField, setSelectedFie
 
             <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               <h3 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#06b6d4', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: 'monospace' }}>
-                LIVE WEATHER TELEMETRY
+                {t('liveWeatherTelemetry', 'LIVE WEATHER TELEMETRY')}
               </h3>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.65rem', fontSize: '0.8rem' }}>
                 <div style={{ background: 'rgba(15, 23, 42, 0.75)', padding: '0.65rem', borderRadius: '8px', border: '1px solid rgba(99, 102, 241, 0.15)' }}>
-                  <span style={{ color: '#94a3b8', fontSize: '0.68rem', fontWeight: 800, display: 'block', textTransform: 'uppercase', fontFamily: 'monospace' }}>TEMPERATURE</span>
+                  <span style={{ color: '#94a3b8', fontSize: '0.68rem', fontWeight: 800, display: 'block', textTransform: 'uppercase', fontFamily: 'monospace' }}>{t('telemetryTemp', 'TEMPERATURE')}</span>
                   <span style={{ fontSize: '0.95rem', fontWeight: 900, color: '#ffffff', fontFamily: 'monospace' }}>{currentTemp}°C</span>
                 </div>
                 <div style={{ background: 'rgba(15, 23, 42, 0.75)', padding: '0.65rem', borderRadius: '8px', border: '1px solid rgba(99, 102, 241, 0.15)' }}>
-                  <span style={{ color: '#94a3b8', fontSize: '0.68rem', fontWeight: 800, display: 'block', textTransform: 'uppercase', fontFamily: 'monospace' }}>HUMIDITY</span>
+                  <span style={{ color: '#94a3b8', fontSize: '0.68rem', fontWeight: 800, display: 'block', textTransform: 'uppercase', fontFamily: 'monospace' }}>{t('telemetryHumidity', 'HUMIDITY')}</span>
                   <span style={{ fontSize: '0.95rem', fontWeight: 900, color: '#ffffff', fontFamily: 'monospace' }}>{currentHumidity}%</span>
                 </div>
                 <div style={{ background: 'rgba(15, 23, 42, 0.75)', padding: '0.65rem', borderRadius: '8px', border: '1px solid rgba(99, 102, 241, 0.15)' }}>
-                  <span style={{ color: '#94a3b8', fontSize: '0.68rem', fontWeight: 800, display: 'block', textTransform: 'uppercase', fontFamily: 'monospace' }}>DAILY ET0 RATE</span>
+                  <span style={{ color: '#94a3b8', fontSize: '0.68rem', fontWeight: 800, display: 'block', textTransform: 'uppercase', fontFamily: 'monospace' }}>{t('telemetryEt0', 'DAILY ET0 RATE')}</span>
                   <span style={{ fontSize: '0.95rem', fontWeight: 900, color: '#38bdf8', fontFamily: 'monospace' }}>{et0} mm/day</span>
                 </div>
                 <div style={{ background: 'rgba(15, 23, 42, 0.75)', padding: '0.65rem', borderRadius: '8px', border: '1px solid rgba(99, 102, 241, 0.15)' }}>
-                  <span style={{ color: '#94a3b8', fontSize: '0.68rem', fontWeight: 800, display: 'block', textTransform: 'uppercase', fontFamily: 'monospace' }}>RAIN PROBABILITY</span>
+                  <span style={{ color: '#94a3b8', fontSize: '0.68rem', fontWeight: 800, display: 'block', textTransform: 'uppercase', fontFamily: 'monospace' }}>{t('telemetryRainProb', 'RAIN PROBABILITY')}</span>
                   <span style={{ fontSize: '0.95rem', fontWeight: 900, color: rainProb > 50 ? '#38bdf8' : '#ffffff', fontFamily: 'monospace' }}>{rainProb}%</span>
                 </div>
               </div>

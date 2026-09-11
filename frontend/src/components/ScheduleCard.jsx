@@ -42,7 +42,7 @@ export default function ScheduleCard({ scheduleItems, onSelectField }) {
                   {item.field_name}
                 </span>
                 <span className={`badge badge-${item.priority.toLowerCase()}`}>
-                  {item.priority} {t('priority')}
+                  {(item.priority.toLowerCase() === 'critical' ? t('severityCritical', 'Critical') : item.priority.toLowerCase() === 'high' ? t('severityHigh', 'High') : item.priority.toLowerCase() === 'medium' ? t('severityMedium', 'Medium') : t('severityLow', 'Low'))} {t('priority')}
                 </span>
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                   🌾 {item.crop_name}
@@ -59,7 +59,7 @@ export default function ScheduleCard({ scheduleItems, onSelectField }) {
                   <Clock size={13} /> {item.recommended_date} • {item.recommended_time}
                 </div>
                 <div style={{ fontSize: '0.75rem', color: 'var(--water-cyan)', marginTop: '2px' }}>
-                  💧 {item.estimated_water_liters.toLocaleString()} L ({item.duration_minutes} mins)
+                  💧 {item.estimated_water_liters.toLocaleString()} L ({item.duration_minutes} {t('mins', 'mins')})
                 </div>
               </div>
 

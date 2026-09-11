@@ -1,7 +1,9 @@
 import React from 'react';
 import { AlertTriangle, AlertCircle, Info, CheckCircle } from 'lucide-react';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export default function AlertBanner({ alerts, onResolveAlert }) {
+  const { t } = useLanguage();
   const unresolved = alerts.filter(a => !a.is_resolved);
   if (unresolved.length === 0) return null;
 
@@ -15,6 +17,15 @@ export default function AlertBanner({ alerts, onResolveAlert }) {
         return { bg: 'rgba(245, 158, 11, 0.15)', border: 'rgba(245, 158, 11, 0.4)', color: '#f59e0b', icon: Info };
       default:
         return { bg: 'rgba(59, 130, 246, 0.15)', border: 'rgba(59, 130, 246, 0.4)', color: '#3b82f6', icon: Info };
+    }
+  };
+
+  const getSeverityLabel = (severity) => {
+    switch (severity) {
+      case 'Critical': return t('severityCritical', 'Critical');
+      case 'High': return t('severityHigh', 'High');
+      case 'Medium': return t('severityMedium', 'Medium');
+      default: return t('severityLow', 'Low');
     }
   };
 
@@ -47,7 +58,7 @@ export default function AlertBanner({ alerts, onResolveAlert }) {
                     {alert.title}
                   </span>
                   <span className={`badge badge-${alert.severity.toLowerCase()}`}>
-                    {alert.severity}
+                    {getSeverityLabel(alert.severity)}
                   </span>
                 </div>
                 <p style={{ fontSize: '0.82rem', color: 'var(--text-main)', marginTop: '2px' }}>
@@ -73,7 +84,7 @@ export default function AlertBanner({ alerts, onResolveAlert }) {
               }}
             >
               <CheckCircle size={13} />
-              Resolve
+              {t('resolveAlertBtn', 'Resolve')}
             </button>
           </div>
         );

@@ -13,6 +13,7 @@ import MLMetricsModal from './components/MLMetricsModal';
 import AIAgentWidget from './components/AIAgentWidget';
 import LoginPage from './pages/LoginPage';
 import LogoSplashPage from './components/LogoSplashPage';
+import { useLanguage } from './i18n/LanguageContext';
 
 import {
   getFields, createField, updateField, deleteField,
@@ -21,6 +22,7 @@ import {
 } from './services/api';
 
 export default function App() {
+  const { t } = useLanguage();
   const [showSplash, setShowSplash] = useState(true);
   const [user, setUser] = useState(() => {
     try {
@@ -90,17 +92,17 @@ export default function App() {
       setEditingField(null);
       await loadData();
     } catch (err) {
-      alert(`Error saving field: ${err.message}`);
+      alert(`${t('errorSavingField', 'Error saving field:')} ${err.message}`);
     }
   };
 
   const handleDeleteField = async (fieldId) => {
-    if (window.confirm('Are you sure you want to delete this field?')) {
+    if (window.confirm(t('confirmDeleteField', 'Are you sure you want to delete this field?'))) {
       try {
         await deleteField(fieldId);
         await loadData();
       } catch (err) {
-        alert(`Error deleting field: ${err.message}`);
+        alert(`${t('errorDeletingField', 'Error deleting field:')} ${err.message}`);
       }
     }
   };
@@ -112,7 +114,7 @@ export default function App() {
       await loadData();
       setActiveTab('intelligence');
     } catch (err) {
-      alert(`Error submitting environmental reading: ${err.message}`);
+      alert(`${t('errorSubmittingEnv', 'Error submitting environmental reading:')} ${err.message}`);
     }
   };
 
@@ -123,7 +125,7 @@ export default function App() {
       await loadData();
       setActiveTab('intelligence');
     } catch (err) {
-      alert(`IoT Stream error: ${err.message}`);
+      alert(`${t('errorIotStream', 'IoT Stream error:')} ${err.message}`);
     }
   };
 
@@ -140,15 +142,15 @@ export default function App() {
     try {
       const res = await retrainML();
       setMlMetrics(res.metrics || []);
-      alert('ML models retrained successfully!');
+      alert(t('mlRetrainedSuccess', 'ML models retrained successfully!'));
     } catch (err) {
-      alert(`Retraining error: ${err.message}`);
+      alert(`${t('retrainingError', 'Retraining error:')} ${err.message}`);
     }
   };
 
   const handleLogIrrigation = async () => {
     const fieldId = selectedField ? selectedField.id : (fields[0] ? fields[0].id : 1);
-    const amount = prompt('Enter applied water quantity (Liters):', '10000');
+    const amount = prompt(t('promptWaterQuantity', 'Enter applied water quantity (Liters):'), '10000');
     if (amount) {
       try {
         await logIrrigation({
@@ -160,7 +162,7 @@ export default function App() {
         });
         await loadData();
       } catch (err) {
-        alert(`Error logging irrigation: ${err.message}`);
+        alert(`${t('errorLoggingIrrigation', 'Error logging irrigation:')} ${err.message}`);
       }
     }
   };
@@ -277,7 +279,7 @@ export default function App() {
 
       {/* Footer */}
       <footer style={{ borderTop: '1px solid rgba(99, 102, 241, 0.2)', padding: '0.85rem 1.25rem', width: '100%', textAlign: 'center', fontSize: '0.8rem', color: '#94a3b8', background: 'rgba(15, 23, 42, 0.85)' }}>
-        AgriCrop Intelligent Irrigation Platform • Scikit-Learn ML + FAO-56 Agronomic Decision Architecture
+        {t('appFooter', 'AgriCrop Intelligent Irrigation Platform • Scikit-Learn ML + FAO-56 Agronomic Decision Architecture')}
       </footer>
 
       {/* Modals */}

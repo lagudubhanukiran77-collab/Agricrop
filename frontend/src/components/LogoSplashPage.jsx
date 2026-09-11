@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Sprout, Cpu, Droplets, ShieldCheck, ArrowRight, Sparkles } from 'lucide-react';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export default function LogoSplashPage({ onFinish }) {
+  const { t } = useLanguage();
   const [timeLeft, setTimeLeft] = useState(5);
 
   useEffect(() => {
@@ -67,11 +69,11 @@ export default function LogoSplashPage({ onFinish }) {
           WebkitTextFillColor: 'transparent',
           marginBottom: '0.5rem'
         }}>
-          AgriCrop AI
+          {t('splashBrand', 'AgriCrop AI')}
         </h1>
 
         <p style={{ fontSize: '1.05rem', fontWeight: 700, color: '#bae6fd', marginBottom: '1.25rem', letterSpacing: '0.02em' }}>
-          Smart Precision Agriculture & Water Management System
+          {t('splashSubtitle', 'Smart Precision Agriculture & Water Management System')}
         </p>
 
         {/* Tech Subtitle Pill */}
@@ -90,13 +92,13 @@ export default function LogoSplashPage({ onFinish }) {
           marginBottom: '2.5rem'
         }}>
           <Sparkles size={14} color="#34d399" />
-          <span>FAO-56 Penman-Monteith Engine • Scikit-Learn ML</span>
+          <span>{t('splashTechEngine', 'FAO-56 Penman-Monteith Engine • Scikit-Learn ML')}</span>
         </div>
 
         {/* 5-Second Progress Bar */}
         <div style={{ width: '100%', maxWidth: '320px', marginBottom: '0.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', fontWeight: 800, color: '#94a3b8', marginBottom: '6px' }}>
-            <span>LOADING APPLICATION...</span>
+            <span>{t('splashLoading', 'LOADING APPLICATION...')}</span>
             <span style={{ color: '#06b6d4', fontFamily: 'monospace' }}>{timeLeft}s</span>
           </div>
 

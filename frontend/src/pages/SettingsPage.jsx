@@ -24,33 +24,33 @@ export default function SettingsPage({ mlMetrics, onRetrain }) {
             <p style={{ fontSize: '0.82rem', color: '#94a3b8', marginTop: '2px' }}>{t('mlStatusSub', 'FAO-56 agricultural physics with Scikit-Learn ML regression models.')}</p>
           </div>
           <button className="btn btn-primary btn-sm" onClick={onRetrain}>
-            <RefreshCw size={14} /> Trigger Retrain Pipeline
+            <RefreshCw size={14} /> {t('triggerRetrainBtn', 'Trigger Retrain Pipeline')}
           </button>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
           <div className="glass-card" style={{ background: 'rgba(15, 23, 42, 0.75)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#06b6d4', fontSize: '0.78rem', fontWeight: 800, fontFamily: 'monospace' }}>
-              <Database size={15} /> SOIL MOISTURE MODEL
+              <Database size={15} /> {t('soilMoistureModelUpper', 'SOIL MOISTURE MODEL')}
             </div>
             <div style={{ fontSize: '1.2rem', fontWeight: 900, color: '#ffffff', marginTop: '4px' }}>RandomForestRegressor</div>
-            <span style={{ fontSize: '0.72rem', color: '#34d399', fontWeight: 700 }}>R² Score: 0.942 • MSE: 0.081</span>
+            <span style={{ fontSize: '0.72rem', color: '#34d399', fontWeight: 700 }}>{t('r2Score', 'R² Score')}: 0.942 • MSE: 0.081</span>
           </div>
 
           <div className="glass-card" style={{ background: 'rgba(15, 23, 42, 0.75)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#38bdf8', fontSize: '0.78rem', fontWeight: 800, fontFamily: 'monospace' }}>
-              <Server size={15} /> TELEMETRY PIPELINE
+              <Server size={15} /> {t('telemetryPipelineUpper', 'TELEMETRY PIPELINE')}
             </div>
             <div style={{ fontSize: '1.2rem', fontWeight: 900, color: '#ffffff', marginTop: '4px' }}>REST + IoT Ingestion</div>
-            <span style={{ fontSize: '0.72rem', color: '#38bdf8', fontWeight: 700 }}>Latency: 12ms • Active Stream</span>
+            <span style={{ fontSize: '0.72rem', color: '#38bdf8', fontWeight: 700 }}>{t('latency', 'Latency')}: 12ms • {t('activeStream', 'Active Stream')}</span>
           </div>
 
           <div className="glass-card" style={{ background: 'rgba(15, 23, 42, 0.75)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#34d399', fontSize: '0.78rem', fontWeight: 800, fontFamily: 'monospace' }}>
-              <ShieldCheck size={15} /> DECISION ENGINE
+              <ShieldCheck size={15} /> {t('decisionEngineUpper', 'DECISION ENGINE')}
             </div>
             <div style={{ fontSize: '1.2rem', fontWeight: 900, color: '#ffffff', marginTop: '4px' }}>FAO-56 Penman-Monteith</div>
-            <span style={{ fontSize: '0.72rem', color: '#34d399', fontWeight: 700 }}>Verification: Passed</span>
+            <span style={{ fontSize: '0.72rem', color: '#34d399', fontWeight: 700 }}>{t('verification', 'Verification')}: {t('statusPassed', 'Passed')}</span>
           </div>
         </div>
       </div>
